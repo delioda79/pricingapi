@@ -1,0 +1,26 @@
+version: '2'
+services:
+  pricing_sql_db:
+    image: mariadb:10
+    environment:
+      MYSQL_ROOT_PASSWORD: AbcdEfg123
+    ports:
+      - "3309:3306"
+  pricing_api:
+    image: pricing_api
+    build: ./docker/web
+    restart: always
+    ports:
+      - "8180:80"
+      - "8280:8000"
+    links:
+      - pricing_sql_db:sql_server
+    volumes:
+      - ./PricingAPI:/var/www/html
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    links:
+      - pricing_sql_db:db

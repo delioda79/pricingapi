@@ -48,6 +48,10 @@ class ProductController extends AbstractController
         ->getQuery()
         ->getOneOrNullResult();
 
+        if ($price == null) {
+            throw $this->createNotFoundException('The product or the requested pricing does not exist');
+        }
+
         $cost = 0;
         if ($price != null) {
             $cost = $price->getValue() * $qty;

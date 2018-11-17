@@ -102,7 +102,7 @@ class ProductController extends AbstractController
                         $discount += ($price*$discQty*$discVal)/100;
                         break;
                     case "fixed" :
-                    $discount += ($price*$qty)-$discVal;
+                    $discount += $discVal;
                     break;
                 }
                 $qty -= $discQty;
